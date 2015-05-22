@@ -1,0 +1,45 @@
+
+
+//get tags from input
+//call the api with the tags provided
+//show the results on the page
+
+$('#inspiration-getter').submit(function(event){
+    event.preventDefault(); // Stop page from refreshing
+    
+    // Get the input
+    var tag = $('input[name="answerers"]').val();
+    
+    // Call api with items
+    $.getJSON('http://api.stackexchange.com/2.2/tags/'+tag+'/top-answerers/all_time?site=stackoverflow', function(data){
+        console.log(data.items[0].user.display_name);                                                                                                                });
+    $('body').append(items);
+    
+    
+});
+
+<form id="inspiration-getter">
+    <input type="text" name="answerers"/>
+        <input type="submit" value="Find"/>
+</form>
+
+
+$('#inspiration-getter').submit(function(event){
+    event.preventDefault(); // Stop page from refreshing
+    
+    // Get the input
+    var tag = $('input[name="answerers"]').val();
+    
+    // Call api with items
+    $.getJSON('https://api.foursquare.com/v2/venues/search', {
+        client_id: 'CLIENT_ID',
+        client_secret: 'CLIENT_SECRET',
+        v: 20130815,
+        ll: '40.7,-74'
+        query: 'sushi'
+    }, function(data){
+        console.log(data);                                                                                                                });
+    
+    
+    $('body').append(items);
+});

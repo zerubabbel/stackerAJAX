@@ -6,7 +6,29 @@ $(document).ready( function() {
 		var tags = $(this).find("input[name='tags']").val();
 		getUnanswered(tags);
 	});
+
+
+	///inspiration getter
+	$('.inspiration-getter').submit(function(event){
+    event.preventDefault(); // Stop page from refreshing
+    $('.results').html('');
+    // Get the input
+    var tag = $('input[name="answerers"]').val();
+    
+    // Call api with items
+    $.getJSON('http://api.stackexchange.com/2.2/tags/'+tag+'/top-answerers/all_time?site=stackoverflow', function(data){
+         $('.results').text("");
+        for (var i = 0; i <data.items.length; i++){
+        	console.log(data.items[i].user.display_name);
+        	 $('.results').append("<p>" + data.items[i].user.display_name + "</p>");
+        }                                                     
+    });
 });
+});
+//get tags from input
+//call the api with the tags provided
+//show the results on the page
+
 
 // this function takes the question object returned by StackOverflow 
 // and creates new result to be appended to DOM
@@ -87,6 +109,3 @@ var getUnanswered = function(tags) {
 		$('.search-results').append(errorElem);
 	});
 };
-
-
-
